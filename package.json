@@ -7,8 +7,16 @@
   },
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "express": "^4.17.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Taron2008/Programming-3.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Taron2008/Programming-3/issues"
+  },
+  "homepage": "https://github.com/Taron2008/Programming-3#readme",
+  "description": ""
 }
