@@ -58,6 +58,8 @@ class Predator extends LivingCreature{
     eat() {
         var emptyCells = this.chooseCell(2);
         var newCell = random(emptyCells);
+        var emptyCells1 = this.chooseCell(7);
+        var newCell1 = random(emptyCells1);
         if (newCell) {
 
             this.energy++
@@ -74,7 +76,26 @@ class Predator extends LivingCreature{
                 }
             }
 
-        } else {
+        }
+
+        if (newCell1) {
+            this.energy+=1
+            var newX = newCell1[0];
+            var newY = newCell1[1];
+            matrix[newY][newX] = matrix[this.y][this.x]
+            matrix[this.y][this.x] = 0
+            this.x = newX
+            this.y = newY
+            for (var i in energyArr) {
+                if (newX == energyArr[i].x && newY == energyArr[i].y) {
+                    energyArr.splice(i, 1);
+                    break;
+                }
+            }
+
+        }
+
+         else {
             this.move()
         }
     }
