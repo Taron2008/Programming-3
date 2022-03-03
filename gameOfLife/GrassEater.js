@@ -77,23 +77,40 @@ class GrassEater extends LivingCreature {
                 }
             }
 
-        } 
+        }
         if (newCell3) {
-            this.energy+=3
-            var newX = newCell3[0];
-            var newY = newCell3[1];
-            matrix[newY][newX] = matrix[this.y][this.x]
-            matrix[this.y][this.x] = 0
-            this.x = newX
-            this.y = newY
-            for (var i in energyArr) {
-                if (newX == energyArr[i].x && newY == energyArr[i].y) {
-                    energyArr.splice(i, 1);
-                    break;
+            if (weather == true) {
+                this.energy += 3
+                var newX = newCell3[0];
+                var newY = newCell3[1];
+                matrix[newY][newX] = matrix[this.y][this.x]
+                matrix[this.y][this.x] = 0
+                this.x = newX
+                this.y = newY
+                for (var i in energyArr) {
+                    if (newX == energyArr[i].x && newY == energyArr[i].y) {
+                        energyArr.splice(i, 1);
+                        break;
+                    }
                 }
             }
 
-        } 
+            else{
+                this.energy += 1
+                var newX = newCell3[0];
+                var newY = newCell3[1];
+                matrix[newY][newX] = matrix[this.y][this.x]
+                matrix[this.y][this.x] = 0
+                this.x = newX
+                this.y = newY
+                for (var i in energyArr) {
+                    if (newX == energyArr[i].x && newY == energyArr[i].y) {
+                        energyArr.splice(i, 1);
+                        break;
+                    }
+                }
+            }
+        }
         else if (newCell1) {
             this.die()
 

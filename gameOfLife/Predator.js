@@ -79,7 +79,7 @@ class Predator extends LivingCreature{
         }
 
         if (newCell1) {
-            this.energy+=1
+            this.energy+=3
             var newX = newCell1[0];
             var newY = newCell1[1];
             matrix[newY][newX] = matrix[this.y][this.x]

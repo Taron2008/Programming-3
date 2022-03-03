@@ -1,4 +1,4 @@
-function generator(matLen, gr, grEat, pred, seeds, crPred, boss, Energy) {
+function generator(matLen, gr, grEat, pred, seeds, crPred, boss, Energy, bomb) {
     let matrix = [];
     for (let i = 0; i < matLen; i++) {
         matrix[i] = [];
@@ -56,13 +56,23 @@ function generator(matLen, gr, grEat, pred, seeds, crPred, boss, Energy) {
             matrix[x][y] = 7;
         }
     }
+    for (let i = 0; i < bomb; i++) {
+        let x = Math.floor(Math.random() * matLen);
+        let y = Math.floor(Math.random() * matLen);
+        if (matrix[x][y] == 0) {
+            matrix[x][y] = 8;
+        }
+    }
     return matrix;
 }
 let side = 20;
 
 let matrix = generator(50, 50, 50, 50, 10, 20, 5, 22);
 
-let weather = "summer"
+let weather = false
+function weatherFunc(){
+    weather = !weather
+}
 
 let grassArr = []
 let grassEaterArr = []
@@ -71,6 +81,7 @@ let seedsArr = []
 let PrCreatorArr = []
 let bossArr = []
 let energyArr = []
+let BombArr = []
 
 function setup() {
     createCanvas(matrix[0].length * side, matrix.length * side)
@@ -108,22 +119,19 @@ function setup() {
     }
 
 }
-var ChangeWeather = document.getElementById("Weather");
-if (weather == "summer"){
-    ChangeWeather.addEventListener("click", weather = "winter");
-}
-else{
-    ChangeWeather.addEventListener("click", weather = "summer");
-}
+
+// else{
+//     ChangeWeather.addEventListener("click", weatherFunc);
+// }
 function draw() {
-    if (weather == "summer"){
+    if (weather == false){
         Summer()
     }
     else{
         Winter()
     }
-    function Summer(evt) {
-        weather = "summer"
+    function Summer() {
+        
         for (let y = 0; y < matrix.length; y++) {
             for (let x = 0; x < matrix[y].length; x++) {
                 if (matrix[y][x] == 1) {
@@ -156,8 +164,8 @@ function draw() {
         }
     }
 
-    function Winter(evt) {
-        weather = "winter"
+    function Winter() {
+        
         for (let y = 0; y < matrix.length; y++) {
             for (let x = 0; x < matrix[y].length; x++) {
                 if (matrix[y][x] == 1) {
@@ -167,22 +175,22 @@ function draw() {
                     fill('#acacac')
                 }
                 else if (matrix[y][x] == 2) {
-                    fill('yellow')
+                    fill('#faff70')
                 }
                 else if (matrix[y][x] == 3) {
-                    fill('red')
+                    fill('#f76f6f')
                 }
                 else if (matrix[y][x] == 4) {
-                    fill('#9403fc')
+                    fill('#b854ff')
                 }
                 else if (matrix[y][x] == 5) {
-                    fill('#6e2c2c')
+                    fill('#8f5151')
                 }
                 else if (matrix[y][x] == 6) {
-                    fill('#1100ff')
+                    fill('#6b61ed')
                 }
                 else if (matrix[y][x] == 7) {
-                    fill('#04ff00')
+                    fill('#6cfc6a')
                 }
 
                 rect(x * side, y * side, side, side)
@@ -222,7 +230,12 @@ function draw() {
     for (let i in energyArr) {
         energyArr[i].move()
     }
+var ChangeWeather = document.getElementById("Weather");
+
+ChangeWeather.addEventListener("click", weatherFunc);
+
 }
+
 
 
 

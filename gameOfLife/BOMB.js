@@ -1,4 +1,4 @@
-class Boss extends LivingCreature {
+class Bomb extends LivingCreature {
     constructor(x, y) {
         super(x, y)
     }
@@ -21,20 +21,18 @@ class Boss extends LivingCreature {
         return super.chooseCell(character);
     }
 
-    move() {
-
+    mul() {
         var emptyCells = this.chooseCell(0);
         var newCell = random(emptyCells);
+
         if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
-            matrix[newY][newX] = matrix[this.y][this.x]
-            matrix[this.y][this.x] = 0
-            this.x = newX
-            this.y = newY
+            matrix[newY][newX] = 8;
 
+            var newBomb = new Bomb(newX, newY);
+            BombArr.push(newBomb);
         }
-
     }
 
     eat() {
@@ -51,7 +49,7 @@ class Boss extends LivingCreature {
         var emptyCells5 = this.chooseCell(6);
         var newCell5 = random(emptyCells5);
         if (newCell) {
-            
+
             var newX = newCell[0];
             var newY = newCell[1];
             matrix[newY][newX] = matrix[this.y][this.x]
@@ -68,7 +66,7 @@ class Boss extends LivingCreature {
         }
 
         if (newCell1) {
-            
+
             var newX = newCell1[0];
             var newY = newCell1[1];
             matrix[newY][newX] = matrix[this.y][this.x]
@@ -85,7 +83,7 @@ class Boss extends LivingCreature {
         }
 
         if (newCell2) {
-            
+
             var newX = newCell2[0];
             var newY = newCell2[1];
             matrix[newY][newX] = matrix[this.y][this.x]
@@ -102,7 +100,7 @@ class Boss extends LivingCreature {
         }
 
         if (newCell3) {
-            
+
             var newX = newCell3[0];
             var newY = newCell3[1];
             matrix[newY][newX] = matrix[this.y][this.x]
@@ -119,7 +117,7 @@ class Boss extends LivingCreature {
         }
 
         if (newCell4) {
-            
+
             var newX = newCell4[0];
             var newY = newCell4[1];
             matrix[newY][newX] = matrix[this.y][this.x]
@@ -151,8 +149,5 @@ class Boss extends LivingCreature {
 
         }
 
-        else {
-            this.move()
-        }
     }
 }
