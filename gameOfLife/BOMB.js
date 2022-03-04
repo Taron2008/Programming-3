@@ -3,37 +3,23 @@ class Bomb extends LivingCreature {
         super(x, y)
     }
 
-    getNewCoordinates() {
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
-    }
-
-    chooseCell(character) {
-        this.getNewCoordinates();
-        return super.chooseCell(character);
-    }
-
     mul() {
+        this.multiply++;
         var emptyCells = this.chooseCell(0);
         var newCell = random(emptyCells);
 
-        if (newCell) {
+        if (newCell && this.multiply >= 0) {
             var newX = newCell[0];
             var newY = newCell[1];
-            matrix[newY][newX] = 8;
+            matrix[newY][newX] = 0;
 
             var newBomb = new Bomb(newX, newY);
             BombArr.push(newBomb);
+            this.multiply = 0;
         }
     }
+
+
 
     eat() {
         var emptyCells = this.chooseCell(1);
@@ -48,6 +34,8 @@ class Bomb extends LivingCreature {
         var newCell4 = random(emptyCells4);
         var emptyCells5 = this.chooseCell(6);
         var newCell5 = random(emptyCells5);
+        var emptyCells6 = this.chooseCell(7);
+        var newCell6 = random(emptyCells6);
         if (newCell) {
 
             var newX = newCell[0];
@@ -143,6 +131,22 @@ class Bomb extends LivingCreature {
             for (var i in energyArr) {
                 if (newX == energyArr[i].x && newY == energyArr[i].y) {
                     energyArr.splice(i, 1);
+                    break;
+                }
+            }
+
+        }
+
+        if (newCell6) {
+            var newX = newCell5[0];
+            var newY = newCell5[1];
+            matrix[newY][newX] = matrix[this.y][this.x]
+            matrix[this.y][this.x] = 0
+            this.x = newX
+            this.y = newY
+            for (var i in bossArr) {
+                if (newX == bossArr[i].x && newY == bossArr[i].y) {
+                    bossArr.splice(i, 1);
                     break;
                 }
             }

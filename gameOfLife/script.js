@@ -67,7 +67,7 @@ function generator(matLen, gr, grEat, pred, seeds, crPred, boss, Energy, bomb) {
 }
 let side = 20;
 
-let matrix = generator(50, 50, 50, 50, 10, 20, 5, 22);
+let matrix = generator(50, 50, 50, 50, 10, 20, 5, 22, 1);
 
 let weather = false
 function weatherFunc(){
@@ -115,6 +115,10 @@ function setup() {
                 let energy = new Energy(x, y)
                 energyArr.push(energy)
             }
+            else if (matrix[y][x] == 8) {
+                let bomb = new Bomb(x, y)
+                BombArr.push(bomb)
+            }
         }
     }
 
@@ -158,7 +162,9 @@ function draw() {
                 else if (matrix[y][x] == 7) {
                     fill('#04ff00')
                 }
-
+                else if (matrix[y][x] == 8) {
+                    fill('#ff6200')
+                }
                 rect(x * side, y * side, side, side)
             }
         }
@@ -191,6 +197,9 @@ function draw() {
                 }
                 else if (matrix[y][x] == 7) {
                     fill('#6cfc6a')
+                }
+                else if (matrix[y][x] == 8) {
+                    fill('#ff6200')
                 }
 
                 rect(x * side, y * side, side, side)
@@ -231,10 +240,14 @@ function draw() {
         energyArr[i].move()
     }
 var ChangeWeather = document.getElementById("Weather");
-
 ChangeWeather.addEventListener("click", weatherFunc);
 
+// var ChangeWeather = document.getElementById("Bomb");
+// ChangeWeather.addEventListener("click", weatherFunc);
 }
+
+
+
 
 
 
