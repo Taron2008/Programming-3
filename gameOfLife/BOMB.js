@@ -8,19 +8,19 @@ class Bomb extends LivingCreature {
         var emptyCells = this.chooseCell(0);
         var newCell = random(emptyCells);
 
-        if (newCell && this.multiply >= 0) {
+        if (newCell && this.multiply >= 1) {
             var newX = newCell[0];
             var newY = newCell[1];
-            matrix[newY][newX] = 0;
+            matrix[newY][newX] = 8;
 
             var newBomb = new Bomb(newX, newY);
             BombArr.push(newBomb);
-            this.multiply = 0;
+            this.multiply = 4;
         }
     }
 
 
-
+    
     eat() {
         var emptyCells = this.chooseCell(1);
         var newCell = random(emptyCells);
@@ -138,8 +138,8 @@ class Bomb extends LivingCreature {
         }
 
         if (newCell6) {
-            var newX = newCell5[0];
-            var newY = newCell5[1];
+            var newX = newCell6[0];
+            var newY = newCell6[1];
             matrix[newY][newX] = matrix[this.y][this.x]
             matrix[this.y][this.x] = 0
             this.x = newX
@@ -153,5 +153,14 @@ class Bomb extends LivingCreature {
 
         }
 
+    }
+    die() {
+        matrix[this.y][this.x] = 0
+        for (var i in BombArr) {
+            if (this.x == BombArr[i].x && this.y == BombArr[i].y) {
+                BombArr.splice(i, 1);
+                break;
+            }
+        }
     }
 }

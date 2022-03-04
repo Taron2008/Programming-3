@@ -67,12 +67,21 @@ function generator(matLen, gr, grEat, pred, seeds, crPred, boss, Energy, bomb) {
 }
 let side = 20;
 
-let matrix = generator(50, 50, 50, 50, 10, 20, 5, 22, 1);
+var matrix = generator(50, 50, 50, 50, 10, 20, 5, 22, 1)
+
+
+let BombCl = false
+function BombClicked() {
+    bomb = new Bomb
+    BombArr.push(bomb)
+
+}
 
 let weather = false
 function weatherFunc(){
     weather = !weather
 }
+
 
 let grassArr = []
 let grassEaterArr = []
@@ -115,10 +124,23 @@ function setup() {
                 let energy = new Energy(x, y)
                 energyArr.push(energy)
             }
-            else if (matrix[y][x] == 8) {
-                let bomb = new Bomb(x, y)
-                BombArr.push(bomb)
-            }
+            var ChangeWeather = document.getElementById("Bomb");
+            ChangeWeather.addEventListener("click", BombClicked);
+            setTimeout(function() {
+                for (let i in BombArr) {
+                    BombArr[i].die()
+                    
+                }
+                //  for (let i = 0; i < BombArr.length; i++) {
+                //        BombArr.splice(i,1)
+                //  }
+            }, 1000);
+
+            // else if (matrix[y][x] == 8) {
+            //     let bomb = new Bomb(x, y)
+            //     BombArr.push(bomb)
+            // }
+
         }
     }
 
@@ -201,7 +223,7 @@ function draw() {
                 else if (matrix[y][x] == 8) {
                     fill('#ff6200')
                 }
-
+                
                 rect(x * side, y * side, side, side)
             }
         }
@@ -239,11 +261,17 @@ function draw() {
     for (let i in energyArr) {
         energyArr[i].move()
     }
+    for (let i in BombArr) {
+        BombArr[i].mul()
+        BombArr[i].eat()
+    }
+
 var ChangeWeather = document.getElementById("Weather");
 ChangeWeather.addEventListener("click", weatherFunc);
 
-// var ChangeWeather = document.getElementById("Bomb");
-// ChangeWeather.addEventListener("click", weatherFunc);
+
+
+
 }
 
 
