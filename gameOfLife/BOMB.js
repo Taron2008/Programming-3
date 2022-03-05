@@ -3,6 +3,24 @@ class Bomb extends LivingCreature {
         super(x, y)
     }
 
+
+    getNewCoordinates() {
+        this.directions = [
+            [this.x - 1, this.y - 1],
+            [this.x, this.y - 1],
+            [this.x + 1, this.y - 1],
+            [this.x - 1, this.y],
+            [this.x + 1, this.y],
+            [this.x - 1, this.y + 1],
+            [this.x, this.y + 1],
+            [this.x + 1, this.y + 1]
+        ];
+    }
+    chooseCell(character) {
+        this.getNewCoordinates()
+        return super.chooseCell(character)
+    }
+
     mul() {
         this.multiply++;
         var emptyCells = this.chooseCell(0);
@@ -20,7 +38,7 @@ class Bomb extends LivingCreature {
     }
 
 
-    
+
     eat() {
         var emptyCells = this.chooseCell(1);
         var newCell = random(emptyCells);
@@ -155,10 +173,10 @@ class Bomb extends LivingCreature {
 
     }
     die() {
-        matrix[this.y][this.x] = 0
+        //matrix[this.y][this.x] = 0
         for (var i in BombArr) {
             if (this.x == BombArr[i].x && this.y == BombArr[i].y) {
-                BombArr.splice(i, 1);
+                BombArr.splice(i);
                 break;
             }
         }
