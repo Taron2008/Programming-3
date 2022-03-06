@@ -12,6 +12,7 @@ class Grass extends LivingCreature {
             var newGrass = new Grass(newX, newY);
             grassArr.push(newGrass);
             this.multiply = 0;
+            
         }
     }
 

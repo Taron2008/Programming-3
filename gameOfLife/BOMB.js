@@ -4,20 +4,20 @@ class Bomb extends LivingCreature {
     }
 
 
-    getNewCoordinates() {
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
-    }
+    // getNewCoordinates() {
+    //     this.directions = [
+    //         [this.x - 1, this.y - 1],
+    //         [this.x, this.y - 1],
+    //         [this.x + 1, this.y - 1],
+    //         [this.x - 1, this.y],
+    //         [this.x + 1, this.y],
+    //         [this.x - 1, this.y + 1],
+    //         [this.x, this.y + 1],
+    //         [this.x + 1, this.y + 1]
+    //     ];
+    // }
     chooseCell(character) {
-        this.getNewCoordinates()
+        
         return super.chooseCell(character)
     }
 
@@ -35,7 +35,11 @@ class Bomb extends LivingCreature {
             BombArr.push(newBomb);
             this.multiply = 4;
         }
+        else if(BombCl == false){
+            this.die()
+        }
     }
+    
 
 
 
@@ -173,10 +177,10 @@ class Bomb extends LivingCreature {
 
     }
     die() {
-        //matrix[this.y][this.x] = 0
+        matrix[this.y][this.x] = 0
         for (var i in BombArr) {
             if (this.x == BombArr[i].x && this.y == BombArr[i].y) {
-                BombArr.splice(i);
+                BombArr.splice(i,1);
                 break;
             }
         }

@@ -71,11 +71,8 @@ var matrix = generator(50, 50, 50, 50, 10, 20, 5, 22)
 
 
 let BombCl = false
-
-
-
-
 let weather = false
+
 function weatherFunc() {
     weather = !weather
 }
@@ -127,6 +124,7 @@ function setup() {
                 let bombik = new Bomb(x, y)
                 BombArr.push(bombik)
             }
+
 
         }
     }
@@ -213,7 +211,35 @@ function draw() {
         }
     }
 
+    var nowX = 0
+    var nowY = 0
+    
+    function BombClicked() {
+        BombCl = true
+        for (let y = 0; y < matrix.length; y++) {
+            for (let x = 0; x < matrix[y].length; x++) {
+                nowX = x
+                nowY = y
+            }
+        }    
+    }
 
+    if (BombCl == true){
+        bombik = new Bomb(nowX, nowY)
+        BombArr.push(bombik)
+        console.log(BombArr);
+        if (BombArr.length >= 15){
+            BombCl = false
+            nowX = 0
+            nowY = 0
+        }
+    }
+    // else{
+    //     for (let i in BombArr) {
+    //         BombArr[i].die()
+    //         console.log(BombArr);
+    //     }
+    // }
 
     for (let i in grassArr) {
         grassArr[i].mul()
@@ -248,34 +274,25 @@ function draw() {
     for (let i in BombArr) {
         BombArr[i].mul()
         BombArr[i].eat()
-        
+        if (BombCl == false){
+            BombArr[i].die()
+            console.log(BombArr);
+        }
+
     }
 
-      
-    
     var ChangeWeather = document.getElementById("Weather");
     ChangeWeather.addEventListener("click", weatherFunc);
 
     var BombStart = document.getElementById("Bomb");
     BombStart.addEventListener("click", BombClicked);
 
+
+    
+
     
 }
 
-function BombClicked() {
-        BombCl = true
-        let bombik = new Bomb()
-        BombArr.push(bombik)
-         console.log(BombCl);
-         console.log(BombArr);
-        setTimeout(() => {
-            BombCl = false
-            for (let i in BombArr) {
-                BombArr[i].die()
-            }
-            console.log(BombCl);
-            console.log(BombArr);
-        }, 5000);
 
 
 
@@ -283,4 +300,7 @@ function BombClicked() {
 
 
 
-    }
+
+
+
+
