@@ -177,12 +177,14 @@ class Bomb extends LivingCreature {
 
     }
     die() {
-        matrix[this.y][this.x] = 0
+        
         for (var i in BombArr) {
-            if (this.x == BombArr[i].x && this.y == BombArr[i].y) {
+            //if (this.x == BombArr[i].x && this.y == BombArr[i].y) {
+                matrix[BombArr[i].y][BombArr[i].x] = 0
                 BombArr.splice(i);
-                
-            }
+                console.log(BombArr);
+            //} 
+            
         }
     }
 }
