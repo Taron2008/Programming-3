@@ -180,8 +180,8 @@ class Bomb extends LivingCreature {
         matrix[this.y][this.x] = 0
         for (var i in BombArr) {
             if (this.x == BombArr[i].x && this.y == BombArr[i].y) {
-                BombArr.splice(i,1);
-                break;
+                BombArr.splice(i);
+                
             }
         }
     }

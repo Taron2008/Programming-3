@@ -73,6 +73,32 @@ var matrix = generator(50, 50, 50, 50, 10, 20, 5, 22)
 let BombCl = false
 let weather = false
 
+let male = false
+let female = false
+let maleAndFemale = true
+
+function ChangeGenderMale() {
+    male = true
+    female = false
+    maleAndFemale = false
+    console.log(male, female, maleAndFemale);
+}
+
+function ChangeGenderFemale() {
+    male = false
+    female = true
+    maleAndFemale = false
+    console.log(male, female, maleAndFemale);
+}
+
+function MaleAndFemaleGender() {
+    male = false
+    female = false
+    maleAndFemale = true
+    console.log(male, female, maleAndFemale);
+}
+
+
 function weatherFunc() {
     weather = !weather
 }
@@ -272,12 +298,13 @@ function draw() {
         energyArr[i].move()
     }
     for (let i in BombArr) {
-        BombArr[i].mul()
         BombArr[i].eat()
-        if (BombCl == false){
-            BombArr[i].die()
-            console.log(BombArr);
-        }
+        BombArr[i].mul()
+        
+        // if (BombCl == false){
+        //     BombArr[i].die()
+        //     console.log(BombArr);
+        // }
 
     }
 
@@ -287,8 +314,14 @@ function draw() {
     var BombStart = document.getElementById("Bomb");
     BombStart.addEventListener("click", BombClicked);
 
+    var Male = document.getElementById("male");
+    Male.addEventListener("click", ChangeGenderMale);
 
-    
+    var female = document.getElementById("female");
+    female.addEventListener("click", ChangeGenderFemale);
+
+    var Male_And_Female = document.getElementById("MaleAndFemale");
+    Male_And_Female.addEventListener("click", MaleAndFemaleGender);
 
     
 }
