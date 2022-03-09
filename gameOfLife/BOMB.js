@@ -35,9 +35,7 @@ class Bomb extends LivingCreature {
             BombArr.push(newBomb);
             this.multiply = 4;
         }
-        else if(BombCl == false){
-            this.die()
-        }
+        
     }
     
 
@@ -175,16 +173,5 @@ class Bomb extends LivingCreature {
 
         }
 
-    }
-    die() {
-        
-        for (var i in BombArr) {
-            //if (this.x == BombArr[i].x && this.y == BombArr[i].y) {
-                matrix[BombArr[i].y][BombArr[i].x] = 0
-                BombArr.splice(i);
-                console.log(BombArr);
-            //} 
-            
-        }
     }
 }

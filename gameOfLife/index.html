@@ -7,6 +7,7 @@
     <title>Game of Life</title>
 </head>
 <body>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
     <script src="script.js"></script>
     <script src="class.js"></script>
@@ -18,13 +19,20 @@
     <script src="boss.js"></script>
     <script src="Energy.js"></script>
     <script src="BOMB.js"></script>
-    <script src="statistics.js"></script>
     
 
     <p id="Weather">🌍Weather🌍</p>
-    <p id="Bomb">🔥BOMB🔥</p>
+    <p id="Bomb">🔥ATOMIC BOMB🔥(destroys everything)</p>
     <p id="male">Male</p>
     <p id="female">Female</p>
     <p id="MaleAndFemale">Male and female</p>
+    <p>__________________________</p>
+    <p id="grass"></p>
+    <p id="grassEater"></p>
+    <p id="predator"></p>
+    <p id="prCreator"></p>
+    <p id="seeds"></p>
+    <p id="energy"></p>
+    <p id="boss"></p>
 </body>
 </html>

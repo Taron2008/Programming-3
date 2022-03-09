@@ -2,11 +2,11 @@ class LivingCreature {
     constructor(x, y) {
         this.x = x
         this.y = y
-        if (weather == false && maleAndFemale == true) {
+        if ((weather == false && maleAndFemale == true) || (maleAndFemale == true && weather == true)) {
             this.multiply = 3
         }
         else if ((weather == true && male == true) || (female == true && weather == false)) {
-            this.multiply = -3
+            this.multiply = -2
         }
         this.directions = [
             [this.x - 1, this.y - 1],

@@ -65,6 +65,9 @@ function generator(matLen, gr, grEat, pred, seeds, crPred, boss, Energy, bomb) {
     }
     return matrix;
 }
+
+
+
 let side = 20;
 
 var matrix = generator(50, 50, 50, 50, 10, 20, 5, 22)
@@ -102,6 +105,10 @@ function MaleAndFemaleGender() {
 function weatherFunc() {
     weather = !weather
 }
+
+var socket = io.connect("http://localhost:3000")
+
+var statistics = {}
 
 
 let grassArr = []
@@ -239,7 +246,7 @@ function draw() {
 
     var nowX = 0
     var nowY = 0
-    
+
     function BombClicked() {
         BombCl = true
         for (let y = 0; y < matrix.length; y++) {
@@ -247,25 +254,14 @@ function draw() {
                 nowX = x
                 nowY = y
             }
-        }    
+        }
     }
 
-    if (BombCl == true){
+    if (BombCl == true) {
         bombik = new Bomb(nowX, nowY)
         BombArr.push(bombik)
         console.log(BombArr);
-        if (BombArr.length >= 15){
-            BombCl = false
-            nowX = 0
-            nowY = 0
-        }
     }
-    // else{
-    //     for (let i in BombArr) {
-    //         BombArr[i].die()
-    //         console.log(BombArr);
-    //     }
-    // }
 
     for (let i in grassArr) {
         grassArr[i].mul()
@@ -300,11 +296,6 @@ function draw() {
     for (let i in BombArr) {
         BombArr[i].eat()
         BombArr[i].mul()
-        
-        // if (BombCl == false){
-        //     BombArr[i].die()
-        //     console.log(BombArr);
-        // }
 
     }
 
@@ -323,8 +314,42 @@ function draw() {
     var Male_And_Female = document.getElementById("MaleAndFemale");
     Male_And_Female.addEventListener("click", MaleAndFemaleGender);
 
-    
+    statistics = {
+        grass: grassArr.length,
+        grassEater: grassEaterArr.length,
+        predator: predatorArr.length,
+        prCreator: PrCreatorArr.length,
+        seeds: seedsArr.length,
+        boss: bossArr.length,
+        energy: energyArr.length
+    };
+
+
 }
+
+setInterval(function () {
+    socket.emit("send stat", statistics)
+
+}, 1000);
+
+
+socket.on("send json", function (data) {
+    document.getElementById("grass").innerHTML = "Grass -- " + data.grass;
+    document.getElementById("grassEater").innerHTML = "GrassEater -- " + data.grassEater;
+    document.getElementById("predator").innerHTML = "Predator -- " + data.predator;
+    document.getElementById("prCreator").innerHTML = "PrCreator -- " + data.prCreator;
+    document.getElementById("seeds").innerHTML = "Seeds -- " + data.seeds;
+    document.getElementById("boss").innerHTML = "Boss -- " + data.boss;
+    document.getElementById("energy").innerHTML = "Energy -- " + data.energy;
+})
+
+
+
+
+
+
+
+
 
 
 
