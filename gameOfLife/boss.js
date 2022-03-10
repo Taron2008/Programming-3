@@ -155,4 +155,14 @@ class Boss extends LivingCreature {
             this.move()
         }
     }
+
+    die() {
+        matrix[this.y][this.x] = 0
+        for (var i in bossArr) {
+            if (this.x == bossArr[i].x && this.y == bossArr[i].y) {
+                bossArr.splice(i, 1);
+                break;
+            }
+        }
+    }
 }

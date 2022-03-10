@@ -276,7 +276,7 @@ function draw() {
     }
     for (let i in seedsArr) {
         seedsArr[i].move()
-        if (grassArr.length < 100) {
+        if (grassArr.length < 100 && BombCl == false) {
             seedsArr[i].mul()
         }
     }
@@ -294,8 +294,8 @@ function draw() {
         energyArr[i].move()
     }
     for (let i in BombArr) {
-        BombArr[i].eat()
         BombArr[i].mul()
+        BombArr[i].eat()
 
     }
 

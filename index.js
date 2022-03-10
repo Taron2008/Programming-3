@@ -15,7 +15,7 @@ app.get("/", function (req, res) {
 
 io.on("connection", function(socket){
    socket.on("send stat", function(data){
-      fs.writeFile("statistics.json", JSON.stringify(data))
+      fs.writeFile("statistics.json", JSON.stringify(data), function(){})
       var stat = JSON.parse(JSON.stringify(data))
       socket.emit("send json", stat)
    })
